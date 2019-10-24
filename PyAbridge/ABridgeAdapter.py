@@ -78,6 +78,12 @@ class SocketAdapter(object):
     def initIndexSocket(self, addr):
         return _ABridgeAdapter.SocketAdapter_initIndexSocket(self, addr)
 
+    def closeIndexSocket(self):
+        return _ABridgeAdapter.SocketAdapter_closeIndexSocket(self)
+
+    def closeDataSocket(self):
+        return _ABridgeAdapter.SocketAdapter_closeDataSocket(self)
+
     def recvIndexMsg(self):
         return _ABridgeAdapter.SocketAdapter_recvIndexMsg(self)
 

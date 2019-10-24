@@ -12,7 +12,8 @@ setup(
     keywords=['VST', 'MIDI', 'AUDIO', 'ABRIDGE'],
     install_requires=[
         'PyDispatcher',
-        'trio'
+        'trio',
+        'zlib'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
