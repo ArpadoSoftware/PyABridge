@@ -5,4 +5,5 @@ include setup.py
 include PyAbridge/ABridgeAdapter.py
 include PyAbridge/__init__.py
 include PyAbridge/_ABridgeAdapter.so
+include PyAbridge/_ABridgeAdapter.dll
 exclude PyAbridge/test*.py
