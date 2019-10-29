@@ -61,16 +61,12 @@ class _SwigNonDynamicMeta(type):
     __setattr__ = _swig_setattr_nondynamic_class_variable(type.__setattr__)
 
 
-ZLIB_COMPRESSION = _ABridgeAdapter.ZLIB_COMPRESSION
 ERROR_INVALID_ID = _ABridgeAdapter.ERROR_INVALID_ID
 ERROR_CANNOT_SEND = _ABridgeAdapter.ERROR_CANNOT_SEND
 ERROR_CANNOT_RECV = _ABridgeAdapter.ERROR_CANNOT_RECV
 class SocketAdapter(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
-
-    def setCompressionLevel(self, level):
-        return _ABridgeAdapter.SocketAdapter_setCompressionLevel(self, level)
 
     def initDataSocket(self, addr):
         return _ABridgeAdapter.SocketAdapter_initDataSocket(self, addr)

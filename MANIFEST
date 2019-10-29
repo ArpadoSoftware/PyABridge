@@ -3,7 +3,8 @@ LICENSE.txt
 README.rst
 setup.cfg
 setup.py
-PyAbridge/ABridgeAdapter.py
-PyAbridge/_ABridgeAdapter.dll
-PyAbridge/_ABridgeAdapter.so
-PyAbridge/__init__.py
+PyABridge/ABridge.py
+PyABridge/ABridgeAdapter.py
+PyABridge/_ABridgeAdapter.pyd
+PyABridge/_ABridgeAdapter.so
+PyABridge/__init__.py

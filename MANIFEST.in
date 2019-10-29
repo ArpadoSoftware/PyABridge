@@ -2,8 +2,9 @@ include README.rst
 include LICENSE.txt
 include setup.cfg
 include setup.py
-include PyAbridge/ABridgeAdapter.py
-include PyAbridge/__init__.py
-include PyAbridge/_ABridgeAdapter.so
-include PyAbridge/_ABridgeAdapter.dll
-exclude PyAbridge/test*.py
+include PyABridge/ABridge.py
+include PyABridge/ABridgeAdapter.py
+include PyABridge/__init__.py
+include PyABridge/_ABridgeAdapter.so
+include PyABridge/_ABridgeAdapter.pyd
+exclude PyABridge/test*.py

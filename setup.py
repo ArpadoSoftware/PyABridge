@@ -1,7 +1,7 @@
 from distutils.core import setup
 setup(
-    name='PyAbridge',
-    packages=['PyAbridge'],
+    name='PyABridge',
+    packages=['PyABridge'],
     version='1.0',
     license='MIT',
     description='',
@@ -9,7 +9,7 @@ setup(
     author_email='support@arpado.site',
     url='https://github.com/user/reponame',
     download_url='https://github.com/user/reponame/archive/v_01.tar.gz',
-    keywords=['VST', 'MIDI', 'AUDIO', 'ABRIDGE'],
+    keywords=['VST', 'MIDI', 'AUDIO', 'ABRIDGE', 'ARPADO'],
     install_requires=[
         'PyDispatcher',
         'trio',
