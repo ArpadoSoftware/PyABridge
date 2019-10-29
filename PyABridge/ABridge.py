@@ -95,7 +95,6 @@ class ABridge(object):
 
             try:
                 checkInMsg = self.sa.recvIndexMsg()
-                print(checkInMsg)
                 self.lane = int(float(checkInMsg))
 
                 self.sa.sendIndexMsg(str(self.lane))
