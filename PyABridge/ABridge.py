@@ -139,7 +139,7 @@ class ABridge(object):
                 msgOut = self.onDataReady(data=msgIn)
 
                 self.sa.sendDataMsg(json.dumps(msgOut))
-            except KeyboardInterrupt:
+            except (KeyboardInterrupt, Exception):
                 pass
             finally:
                 time.sleep(0.000001)
