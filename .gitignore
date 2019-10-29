@@ -1,3 +1,4 @@
 PyAbridge/test*.py
 dist/
 __pycache__
+python.exe.stackdump
