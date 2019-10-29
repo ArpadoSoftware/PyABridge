@@ -149,3 +149,9 @@ class ABridge(object):
     def finish(self):
         self.sa.closeIndexSocket()
         self.sa.closeDataSocket()
+
+        self.dataAddr = None
+        self.laneAssigned = False
+        self.hasStop = False
+        self.isIndexReady = False
+        self.isDataReady = False
