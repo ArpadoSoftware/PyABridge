@@ -1,6 +1,6 @@
 
 import sys
-from ABridge import ABridge
+from PyABridge import ABridge
 
 
 def onData(data):
@@ -8,7 +8,7 @@ def onData(data):
 
 
 def main():
-    ab = ABridge()
+    ab = ABridge.ABridge()
     ab.setDataCallback(onData)
 
     ab.start()
