@@ -7,12 +7,18 @@ setup(
     description='',
     author='Arpado Software',
     author_email='support@arpado.site',
-    url='https://github.com/ArpadoSoftware/PyAbridge',
-    download_url='https://github.com/ArpadoSoftware/PyAbridge/archive/v_01.tar.gz',
+    url='https://github.com/ArpadoSoftware/PyABridge',
+    download_url='https://github.com/ArpadoSoftware/PyABridge/dist/PyABridge-1.0.tar.gz',
     keywords=['VST', 'MIDI', 'AUDIO', 'ABRIDGE', 'ARPADO'],
     install_requires=[
         'PyDispatcher'
     ],
+    package_dir={'PyABridge': 'PyABridge'},
+    data_files=[('.', [
+        'PyABridge/_ABridgeAdapter.pyd',
+        'PyABridge/_ABridgeAdapter.so',
+        'PyABridge/libwinpthread-1.dll',
+    ])],
     classifiers=[
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
@@ -23,4 +29,5 @@ setup(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
     ],
+    include_package_data = True
 )

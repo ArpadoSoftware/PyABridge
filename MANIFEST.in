@@ -7,4 +7,5 @@ include PyABridge/ABridgeAdapter.py
 include PyABridge/__init__.py
 include PyABridge/_ABridgeAdapter.so
 include PyABridge/_ABridgeAdapter.pyd
+include PyABridge/libwinpthread-1.dll
 exclude PyABridge/test*.py

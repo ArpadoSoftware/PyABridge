@@ -8,3 +8,4 @@ PyABridge/ABridgeAdapter.py
 PyABridge/_ABridgeAdapter.pyd
 PyABridge/_ABridgeAdapter.so
 PyABridge/__init__.py
+PyABridge/libwinpthread-1.dll
