@@ -1,5 +1,5 @@
 import time
-import ABridgeAdapter as ab
+from . import ABridgeAdapter as ab
 import threading
 import json
 from pydispatch import dispatcher
