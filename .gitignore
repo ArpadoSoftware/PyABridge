@@ -1,4 +1,4 @@
-PyAbridge/test*.py
 dist/
+!PyABridge/dist
 __pycache__
 python.exe.stackdump

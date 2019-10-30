@@ -7,13 +7,11 @@ setup(
     description='',
     author='Arpado Software',
     author_email='support@arpado.site',
-    url='https://github.com/user/reponame',
-    download_url='https://github.com/user/reponame/archive/v_01.tar.gz',
+    url='https://github.com/ArpadoSoftware/PyAbridge',
+    download_url='https://github.com/ArpadoSoftware/PyAbridge/archive/v_01.tar.gz',
     keywords=['VST', 'MIDI', 'AUDIO', 'ABRIDGE', 'ARPADO'],
     install_requires=[
-        'PyDispatcher',
-        'trio',
-        'zlib'
+        'PyDispatcher'
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
