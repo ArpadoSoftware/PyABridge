@@ -7,7 +7,7 @@ from random import randrange
 
 
 class ABridge(object):
-    VERSION = 0.1
+    VERSION = 1.0.1
     MAX_CONNECT_RETRIES = 1000000
 
     SIGNAL_INDEX_READY = 1
@@ -64,6 +64,8 @@ class ABridge(object):
     def start(self):
         print('[PyABridge] starting new thread...')
 
+        self.hasStop = False
+
         self.runThread = threading.Thread(name=self.id, target=self._run)
         self.runThread.setDaemon(False)
         self.runThread.start()
@@ -73,11 +75,7 @@ class ABridge(object):
 
         print('[PyABridge] thread started')
 
-        while not self.isIndexReady and cr <= self.MAX_CONNECT_RETRIES:
-            if self.hasStop:
-                self.finish()
-                break
-
+        while not self.hasStop and not self.isIndexReady and cr <= self.MAX_CONNECT_RETRIES:
             cr += 1
             self.isIndexReady = self.sa.initIndexSocket(self.indexAddr)
 
@@ -88,11 +86,7 @@ class ABridge(object):
         dispatcher.send(message={'signal': self.SIGNAL_INDEX_READY, 'sender': self.id},
                         signal=self.SIGNAL_INDEX_READY, sender=self.id)
 
-        while not self.laneAssigned:
-            if self.hasStop:
-                self.finish()
-                break
-
+        while not self.hasStop and not self.laneAssigned:
             try:
                 checkInMsg = self.sa.recvIndexMsg()
                 self.lane = int(float(checkInMsg))
@@ -110,11 +104,7 @@ class ABridge(object):
 
         cr = 0
 
-        while not self.isDataReady and cr <= self.MAX_CONNECT_RETRIES:
-            if self.hasStop:
-                self.finish()
-                break
-
+        while not self.hasStop and not self.isDataReady and cr <= self.MAX_CONNECT_RETRIES:
             cr += 1
             self.isDataReady = self.sa.initDataSocket(self.dataAddr)
 
@@ -126,11 +116,7 @@ class ABridge(object):
 
         print('[PyABridge] data lane ready at %s' % self.dataAddr)
 
-        while True:
-            if self.hasStop:
-                self.finish()
-                break
-
+        while not self.hasStop:
             try:
                 dataMsg = self.sa.recvDataMsg()
                 msgIn = json.loads(dataMsg)
