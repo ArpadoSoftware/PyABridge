@@ -7,12 +7,13 @@ from random import randrange
 
 
 class ABridge(object):
-    VERSION = '1.0.2'
+    VERSION = '1.0.3'
     MAX_CONNECT_RETRIES = 1000000
 
     SIGNAL_INDEX_READY = 1
     SIGNAL_LANE_READY = 2
     SIGNAL_DATA_READY = 3
+    SIGNAL_STOP = 4
 
     def __init__(self, **options):
         self.indexAddr = 'ipc:///tmp/aBridgeIndex'
@@ -46,6 +47,9 @@ class ABridge(object):
         if message['signal'] == self.SIGNAL_LANE_READY:
             self.onLaneReady(message)
 
+        if message['signal'] == self.SIGNAL_STOP:
+            self.hasStop = True
+
     def onIndexReady(self, message=None):
         pass
 
@@ -59,7 +63,8 @@ class ABridge(object):
         return self.dataCallback(data)
 
     def stop(self):
-        self.hasStop = True
+        dispatcher.send(message={'signal': self.SIGNAL_STOP, 'sender': self.id},
+                        signal=self.SIGNAL_STOP, sender=self.id)
 
     def start(self):
         print('[PyABridge] starting new thread...')
@@ -74,6 +79,9 @@ class ABridge(object):
         cr = 0
 
         print('[PyABridge] thread started')
+
+        dispatcher.connect(
+            self.onSignal, signal=self.SIGNAL_STOP, sender=self.id)
 
         while not self.hasStop and not self.isIndexReady and cr <= self.MAX_CONNECT_RETRIES:
             cr += 1
@@ -138,6 +146,5 @@ class ABridge(object):
 
         self.dataAddr = None
         self.laneAssigned = False
-        self.hasStop = False
         self.isIndexReady = False
         self.isDataReady = False
