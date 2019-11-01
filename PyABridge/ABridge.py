@@ -7,7 +7,7 @@ from random import randrange
 
 
 class ABridge(object):
-    VERSION = 1.0.1
+    VERSION = 1.0.2
     MAX_CONNECT_RETRIES = 1000000
 
     SIGNAL_INDEX_READY = 1
