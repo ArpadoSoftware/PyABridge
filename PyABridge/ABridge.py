@@ -7,7 +7,7 @@ from random import randrange
 
 
 class ABridge(object):
-    VERSION = 1.0.2
+    VERSION = '1.0.2'
     MAX_CONNECT_RETRIES = 1000000
 
     SIGNAL_INDEX_READY = 1
@@ -29,7 +29,7 @@ class ABridge(object):
         for key in options:
             setattr(self, key, options[key])
 
-        print('[PyABridge] version %f' % self.VERSION)
+        print('[PyABridge] version %s' % self.VERSION)
 
         dispatcher.connect(
             self.onSignal, signal=self.SIGNAL_INDEX_READY, sender=self.id)
