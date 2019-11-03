@@ -2,7 +2,7 @@ from distutils.core import setup
 setup(
     name='PyABridge',
     packages=['PyABridge'],
-    version='1.0.3',
+    version='1.0.4',
     license='MIT',
     description='',
     author='Arpado Software',

@@ -7,13 +7,15 @@ from random import randrange
 
 
 class ABridge(object):
-    VERSION = '1.0.3'
+    VERSION = '1.0.4'
     MAX_CONNECT_RETRIES = 1000000
 
     SIGNAL_INDEX_READY = 1
     SIGNAL_LANE_READY = 2
     SIGNAL_DATA_READY = 3
     SIGNAL_STOP = 4
+    SIGNAL_PAUSE = 5
+    SIGNAL_RESUME = 6
 
     def __init__(self, **options):
         self.indexAddr = 'ipc:///tmp/aBridgeIndex'
@@ -25,6 +27,7 @@ class ABridge(object):
         self.laneAssigned = False
         self.lane = None
         self.hasStop = False
+        self.hasPause = False
         self.id = 'ABridge%i' % randrange(100000, 999999)
 
         for key in options:
@@ -50,6 +53,12 @@ class ABridge(object):
         if message['signal'] == self.SIGNAL_STOP:
             self.hasStop = True
 
+        if message['signal'] == self.SIGNAL_PAUSE:
+            self.hasPause = True
+
+        if message['signal'] == self.SIGNAL_RESUME:
+            self.hasPause = False
+
     def onIndexReady(self, message=None):
         pass
 
@@ -65,6 +74,14 @@ class ABridge(object):
     def stop(self):
         dispatcher.send(message={'signal': self.SIGNAL_STOP, 'sender': self.id},
                         signal=self.SIGNAL_STOP, sender=self.id)
+
+    def pause(self):
+        dispatcher.send(message={'signal': self.SIGNAL_PAUSE, 'sender': self.id},
+                        signal=self.SIGNAL_PAUSE, sender=self.id)
+
+    def resume(self):
+        dispatcher.send(message={'signal': self.SIGNAL_RESUME, 'sender': self.id},
+                        signal=self.SIGNAL_RESUME, sender=self.id)
 
     def start(self):
         print('[PyABridge] starting new thread...')
@@ -82,6 +99,10 @@ class ABridge(object):
 
         dispatcher.connect(
             self.onSignal, signal=self.SIGNAL_STOP, sender=self.id)
+        dispatcher.connect(
+            self.onSignal, signal=self.SIGNAL_PAUSE, sender=self.id)
+        dispatcher.connect(
+            self.onSignal, signal=self.SIGNAL_RESUME, sender=self.id)
 
         while not self.hasStop and not self.isIndexReady and cr <= self.MAX_CONNECT_RETRIES:
             cr += 1
@@ -126,13 +147,14 @@ class ABridge(object):
 
         while not self.hasStop:
             try:
-                dataMsg = self.sa.recvDataMsg()
-                msgIn = json.loads(dataMsg)
+                if not self.hasPause:
+                    dataMsg = self.sa.recvDataMsg()
+                    msgIn = json.loads(dataMsg)
 
-                # process data here
-                msgOut = self.onDataReady(data=msgIn)
+                    # process data here
+                    msgOut = self.onDataReady(data=msgIn)
 
-                self.sa.sendDataMsg(json.dumps(msgOut))
+                    self.sa.sendDataMsg(json.dumps(msgOut))
             except (KeyboardInterrupt, Exception):
                 pass
             finally:
